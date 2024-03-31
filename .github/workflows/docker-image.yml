@@ -17,12 +17,18 @@ jobs:
         uses: docker/setup-buildx-action@v1
 
       - name: Extract tag name
-        run: echo ::set-env name=TAG_NAME::$(basename $GITHUB_REF)
-
+        id: extract_tag
+        run: echo $(basename $GITHUB_REF) > tag.txt
+        
+      - name: Read tag name from file
+        id: read_tag
+        run: echo ::set-output name=TAG_NAME::$(cat tag.txt)
+        shell: bash
+        
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ansible-runner:${{ env.TAG_NAME }}
+          tags: ansible-runner:${{ steps.read_tag.outputs.TAG_NAME }}
