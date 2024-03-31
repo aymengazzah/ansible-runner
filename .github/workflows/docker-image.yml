@@ -22,4 +22,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ansible-runner:${{ github.ref }}
+          tags: ansible-runner:${{ github.ref.split('/')[-1] }}
