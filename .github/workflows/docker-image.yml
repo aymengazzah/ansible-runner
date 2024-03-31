@@ -35,3 +35,9 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ghcr.io/aymengazzah/ansible-runner:${{ steps.read_tag.outputs.TAG_NAME }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/aymengazzah/ansible-runner
+            org.opencontainers.image.description="Ansible-runner"
+            org.opencontainers.image.url=https://github.com/aymengazzah/ansible-runner
+            org.opencontainers.image.licenses=Apache2.0
+            org.opencontainers.image.visibility=public
