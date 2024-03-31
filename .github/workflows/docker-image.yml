@@ -22,4 +22,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ansible-runner:${{ github.ref.split('/')[2] }}
+          tags: ansible-runner:${{ github.event_name == 'push' && contains(github.event.ref, 'refs/tags/') && github.ref }} 
